@@ -1,0 +1,207 @@
+<div class="docs-page">
+  <div class="docs-grid">
+    <article class="docs-body">
+      <header class="page-header">
+        <div class="page-header__meta">
+          <span class="badge badge--stable">Stable</span>
+          <span class="chip">since v{{ entry?.since }}</span>
+          <span class="chip">{{ entry?.group }}</span>
+        </div>
+        <h1>{{ entry?.name }}</h1>
+        <p class="page-header__summary">{{ entry?.summary }}</p>
+        <code class="selector-pill">{{ entry?.selector }}</code>
+      </header>
+
+      <section class="doc-section" id="overview" docsReveal>
+        <h2 class="doc-section__title">Overview</h2>
+        <div class="prose">
+          <p>
+            <strong>pl-button</strong> renders a native <code>&lt;button&gt;</code> element, so
+            keyboard behaviour, focus handling and form submission come from the browser. Color and
+            variant are attributes, which means the markup stays readable and easy to diff.
+          </p>
+        </div>
+        <docs-code-block [code]="importSnippet" language="ts" label="import" />
+        <docs-code-block [code]="basicHtml" language="html" label="basic-usage.html" />
+      </section>
+
+      <section class="doc-section" id="playground" docsReveal>
+        <h2 class="doc-section__title">Playground</h2>
+        <p class="doc-section__hint">
+          Change the inputs below — the markup and the rendered button update together.
+        </p>
+
+        <div class="playground">
+          <div class="playground__stage">
+            <pl-button
+              [color]="playgroundColor()"
+              [variant]="playgroundVariant()"
+              [disabled]="playgroundDisabled()"
+              (clicked)="onPlaygroundClick()"
+            >
+              {{ playgroundLabel() || 'Button' }}
+            </pl-button>
+
+            @if (playgroundClicks() > 0) {
+              <span class="playground__clicks" aria-live="polite">
+                {{ playgroundClicks() }} click{{ playgroundClicks() === 1 ? '' : 's' }}
+              </span>
+            }
+          </div>
+
+          <div class="demo-controls">
+            <div class="demo-control-row">
+              <span class="demo-control-label">Color</span>
+              <div class="segmented" role="group" aria-label="Button color">
+                @for (color of colors; track color) {
+                  <button
+                    type="button"
+                    class="segmented__option"
+                    [class.is-active]="playgroundColor() === color"
+                    [attr.aria-pressed]="playgroundColor() === color"
+                    (click)="setPlaygroundColor(color)"
+                  >
+                    {{ color }}
+                  </button>
+                }
+              </div>
+            </div>
+
+            <div class="demo-control-row">
+              <span class="demo-control-label">Variant</span>
+              <div class="segmented" role="group" aria-label="Button variant">
+                @for (variant of variants; track variant) {
+                  <button
+                    type="button"
+                    class="segmented__option"
+                    [class.is-active]="playgroundVariant() === variant"
+                    [attr.aria-pressed]="playgroundVariant() === variant"
+                    (click)="setPlaygroundVariant(variant)"
+                  >
+                    {{ variant }}
+                  </button>
+                }
+              </div>
+            </div>
+
+            <div class="demo-control-row">
+              <label class="demo-control-label" for="playground-label">Label</label>
+              <input
+                id="playground-label"
+                class="text-input"
+                type="text"
+                [value]="playgroundLabel()"
+                (input)="setPlaygroundLabel($event)"
+                placeholder="Button label"
+              />
+            </div>
+
+            <div class="demo-control-row">
+              <span class="demo-control-label">State</span>
+              <label class="switch">
+                <input
+                  type="checkbox"
+                  [checked]="playgroundDisabled()"
+                  (change)="setPlaygroundDisabled($event)"
+                />
+                <span class="switch__track"></span>
+                <span>Disabled</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <docs-code-block
+          [code]="playgroundSnippet()"
+          language="html"
+          label="generated markup"
+        />
+      </section>
+
+      <section class="doc-section" id="examples" docsReveal>
+        <h2 class="doc-section__title">Examples</h2>
+
+        <docs-demo-card
+          title="Variants"
+          description="Three levels of emphasis built from the same color tokens."
+          [html]="variantsHtml"
+        >
+          <div demoPreview class="demo-row">
+            <pl-button color="primary" variant="filled">Filled</pl-button>
+            <pl-button color="primary" variant="outlined">Outlined</pl-button>
+            <pl-button color="primary" variant="text">Text</pl-button>
+          </div>
+        </docs-demo-card>
+
+        <docs-demo-card
+          title="Colors"
+          description="Color roles map directly to the semantic theme tokens."
+          [html]="colorsHtml"
+        >
+          <div demoPreview class="demo-row">
+            <pl-button color="primary">Primary</pl-button>
+            <pl-button color="secondary">Secondary</pl-button>
+            <pl-button color="danger">Danger</pl-button>
+          </div>
+        </docs-demo-card>
+
+        <docs-demo-card
+          title="Disabled"
+          description="Disables pointer and keyboard interaction and dims the control."
+          [html]="disabledHtml"
+        >
+          <div demoPreview class="demo-row">
+            <pl-button color="danger" [disabled]="true">Delete account</pl-button>
+            <pl-button color="secondary" [disabled]="true">Unavailable</pl-button>
+          </div>
+        </docs-demo-card>
+
+        <docs-demo-card
+          title="Click output"
+          description="Listen to (clicked) when you need the native event; bind (click) on the host for simple handlers."
+          [html]="clickHtml"
+          [ts]="clickTs"
+        >
+          <div demoPreview class="demo-row">
+            <pl-button color="primary" (clicked)="onExampleClick()">Save changes</pl-button>
+            <span class="example-feedback" aria-live="polite">
+              {{ exampleClicks() === 0 ? 'Waiting for a click' : exampleClicks() + ' handled' }}
+            </span>
+          </div>
+        </docs-demo-card>
+      </section>
+
+      <section class="doc-section" id="api" docsReveal>
+        <h2 class="doc-section__title">API reference</h2>
+        <docs-prop-table [rows]="propRows" />
+        <div class="callout">
+          <span aria-hidden="true">💡</span>
+          <span>
+            The host also accepts native attributes, so <code>class</code>,
+            <code>aria-label</code> and <code>data-*</code> attributes pass through to the outer
+            element.
+          </span>
+        </div>
+      </section>
+
+      <section class="doc-section" id="accessibility" docsReveal>
+        <h2 class="doc-section__title">Accessibility</h2>
+        <ul class="check-list">
+          <li>Renders a real <code>&lt;button&gt;</code>, so Enter and Space both activate it.</li>
+          <li>Uses the native <code>disabled</code> attribute, keeping it out of the tab order.</li>
+          <li>Focus styles come from the consuming app — use <code>:focus-visible</code> outlines.</li>
+          <li>
+            Keep labels descriptive. Icon-only buttons should always receive an
+            <code>aria-label</code>.
+          </li>
+        </ul>
+      </section>
+
+      <docs-pager [slug]="slug" />
+    </article>
+
+    <aside class="docs-aside">
+      <docs-toc [sections]="sections" />
+    </aside>
+  </div>
+</div>

@@ -1,0 +1,77 @@
+:host {
+  display: block;
+}
+
+.playground {
+  overflow: hidden;
+  border: 1px solid var(--docs-border);
+  border-radius: var(--docs-radius);
+  background: var(--docs-surface-elevated);
+  box-shadow: var(--docs-shadow);
+}
+
+.playground__stage {
+  display: grid;
+  place-items: center;
+  gap: 0.5rem;
+  min-height: 190px;
+  padding: 1.5rem;
+  margin: 1rem;
+  border: 1px dashed var(--docs-border-strong);
+  border-radius: 10px;
+  background-color: var(--docs-surface);
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    color-mix(in srgb, var(--pl-color-on-background) 8%, transparent) 1px,
+    transparent 0
+  );
+  background-size: 18px 18px;
+}
+
+.field {
+  display: grid;
+  gap: 0.35rem;
+  width: 100%;
+  max-width: 320px;
+}
+
+.field__hint {
+  font-size: 0.76rem;
+  color: var(--docs-muted);
+}
+
+.check-list {
+  display: grid;
+  gap: 0.55rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--docs-muted);
+  font-size: 0.9rem;
+
+  li {
+    position: relative;
+    padding-left: 1.4rem;
+  }
+
+  li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.5em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--pl-color-primary);
+  }
+
+  code {
+    padding: 0.08rem 0.3rem;
+    border: 1px solid var(--docs-border);
+    border-radius: 4px;
+    background: var(--docs-surface);
+    font-family: var(--docs-font-mono);
+    font-size: 0.82em;
+    color: var(--pl-color-on-background);
+  }
+}

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'ml-button',
+  selector: 'pl-button',
   standalone: true,
   imports: [],
   templateUrl: './button.component.html',
@@ -9,5 +9,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class ButtonComponent {
   @Input() disabled = false;
+  @Input() type: 'button' | 'submit' | 'reset' = 'button';
+  @Input() color: 'primary' | 'secondary' | 'danger' = 'primary';
+  @Input() variant: 'filled' | 'outlined' | 'text' = 'filled';
   @Output() clicked = new EventEmitter<MouseEvent>();
 }

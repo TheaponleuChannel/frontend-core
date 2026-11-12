@@ -1,0 +1,36 @@
+<div class="code-block">
+  <div class="code-block__bar">
+    <span class="code-block__dots" aria-hidden="true">
+      <i></i><i></i><i></i>
+    </span>
+    <span class="code-block__label">{{ label() || language() }}</span>
+    <button
+      type="button"
+      class="code-block__copy"
+      [class.is-copied]="copied()"
+      (click)="copy()"
+      [attr.aria-label]="copied() ? 'Copied to clipboard' : 'Copy code to clipboard'"
+    >
+      @if (copied()) {
+        <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+          <path
+            d="M20 6 9 17l-5-5"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+        <span>Copied</span>
+      } @else {
+        <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+          <rect x="9" y="9" width="11" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="2" />
+          <path d="M15 5.5A1.5 1.5 0 0 0 13.5 4H6a2 2 0 0 0-2 2v7.5A1.5 1.5 0 0 0 5.5 15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+        <span>Copy</span>
+      }
+    </button>
+  </div>
+  <pre class="code-block__pre"><code [innerHTML]="highlighted()"></code></pre>
+</div>

@@ -1,0 +1,46 @@
+button {
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-radius: var(--pl-button-radius, 6px);
+  cursor: pointer;
+}
+
+button[data-color='primary'] {
+  --pl-button-background: var(--pl-color-primary, #2563eb);
+  --pl-button-foreground: var(--pl-color-on-primary, #fff);
+  --pl-button-accent: var(--pl-color-primary, #2563eb);
+}
+
+button[data-color='secondary'] {
+  --pl-button-background: var(--pl-color-secondary, #e5e7eb);
+  --pl-button-foreground: var(--pl-color-on-secondary, #111827);
+  --pl-button-accent: var(--pl-color-on-secondary, #111827);
+}
+
+button[data-color='danger'] {
+  --pl-button-background: var(--pl-color-danger, #dc2626);
+  --pl-button-foreground: var(--pl-color-on-danger, #fff);
+  --pl-button-accent: var(--pl-color-danger, #dc2626);
+}
+
+button[data-variant='filled'] {
+  background: var(--pl-button-background);
+  color: var(--pl-button-foreground);
+}
+
+button[data-variant='outlined'] {
+  border-color: var(--pl-button-accent);
+  background: transparent;
+  color: var(--pl-button-accent);
+}
+
+button[data-variant='text'] {
+  border-color: transparent;
+  background: transparent;
+  color: var(--pl-button-accent);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}

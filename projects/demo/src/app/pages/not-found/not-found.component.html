@@ -1,0 +1,20 @@
+<div class="docs-page not-found">
+  <p class="not-found__code" aria-hidden="true">404</p>
+  <h1>This page moved or never existed.</h1>
+  <p class="not-found__lede">
+    The docs are small but growing — pick a destination below and keep exploring.
+  </p>
+
+  <div class="not-found__links">
+    <a class="btn btn--primary" routerLink="/">Back to overview</a>
+    <a class="btn btn--ghost" routerLink="/getting-started">Read the guide</a>
+  </div>
+
+  <ul class="not-found__suggestions">
+    @for (item of suggestions; track item.path) {
+      <li>
+        <a [routerLink]="item.path">{{ item.label }}</a>
+      </li>
+    }
+  </ul>
+</div>

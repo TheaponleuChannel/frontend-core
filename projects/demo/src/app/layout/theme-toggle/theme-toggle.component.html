@@ -1,0 +1,31 @@
+<button
+  type="button"
+  class="theme-toggle"
+  [class.is-dark]="theme.isDark()"
+  [attr.aria-pressed]="theme.isDark()"
+  [attr.aria-label]="theme.isDark() ? 'Switch to light theme' : 'Switch to dark theme'"
+  (click)="theme.toggle()"
+>
+  <span class="theme-toggle__icons" aria-hidden="true">
+    <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="4.4" fill="none" stroke="currentColor" stroke-width="2" />
+      <path
+        d="M12 2.6v2.2M12 19.2v2.2M4.5 12H2.3M21.7 12h-2.2M6.4 6.4 4.8 4.8M19.2 19.2l-1.6-1.6M17.6 6.4l1.6-1.6M4.8 19.2l1.6-1.6"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+      />
+    </svg>
+    <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 24 24">
+      <path
+        d="M20 14.5A8.2 8.2 0 0 1 9.5 4a8.4 8.4 0 1 0 10.5 10.5Z"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linejoin="round"
+      />
+    </svg>
+  </span>
+  <span class="theme-toggle__thumb" aria-hidden="true"></span>
+</button>

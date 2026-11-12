@@ -1,0 +1,16 @@
+<nav class="toc" aria-label="On this page">
+  <p class="toc__title">On this page</p>
+  <ul>
+    @for (section of sections(); track section.id) {
+      <li>
+        <a
+          [href]="'#' + section.id"
+          [class.is-active]="activeId() === section.id"
+          [attr.aria-current]="activeId() === section.id ? 'location' : null"
+        >
+          {{ section.label }}
+        </a>
+      </li>
+    }
+  </ul>
+</nav>

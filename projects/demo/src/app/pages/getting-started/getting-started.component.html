@@ -1,0 +1,149 @@
+<div class="docs-page">
+  <div class="docs-grid">
+    <article class="docs-body">
+      <header class="page-header">
+        <div class="page-header__meta">
+          <span class="chip">Guide</span>
+          <span class="chip">≈ 5 min read</span>
+        </div>
+        <h1>Getting started</h1>
+        <p class="page-header__summary">
+          Core UI ships as a standalone Angular library. Build it once, load the shared theme, and
+          start composing screens with tokens instead of hard-coded colors.
+        </p>
+      </header>
+
+      <section class="doc-section" id="installation" docsReveal>
+        <h2 class="doc-section__title">Installation</h2>
+        <div class="prose">
+          <p>
+            The library lives in the same workspace as this documentation app, so the demo consumes
+            the source directly. For a separate application, build the library and install the
+            output as a local package.
+          </p>
+        </div>
+
+        <ol class="steps">
+          <li class="step">
+            <span class="step__marker">1</span>
+            <div class="step__body">
+              <h3>Build and install</h3>
+              <docs-code-block [code]="installSnippet" language="bash" label="terminal" />
+            </div>
+          </li>
+          <li class="step">
+            <span class="step__marker">2</span>
+            <div class="step__body">
+              <h3>Register the theme</h3>
+              <p>Add the library theme before your own global stylesheet.</p>
+              <docs-code-block [code]="angularJsonSnippet" language="ts" label="angular.json" />
+            </div>
+          </li>
+          <li class="step">
+            <span class="step__marker">3</span>
+            <div class="step__body">
+              <h3>Start rendering</h3>
+              <p>Import the standalone component directly into the component that uses it.</p>
+            </div>
+          </li>
+        </ol>
+
+        <div class="callout callout--warning">
+          <span aria-hidden="true">⚠</span>
+          <span>
+            <strong>Peer versions.</strong> Core UI targets Angular 18 and has no runtime
+            dependencies beyond <code>{{ '@angular/core' }}</code> and
+            <code>{{ '@angular/common' }}</code>.
+          </span>
+        </div>
+      </section>
+
+      <section class="doc-section" id="global-theme" docsReveal>
+        <h2 class="doc-section__title">Global theme</h2>
+        <div class="prose">
+          <p>
+            <strong>theme.css</strong> defines the light palette, the dark palette and the
+            <code>data-theme</code> hooks that switch between them. Load it exactly once — the
+            documentation app adds it through the <code>styles</code> array in
+            <code>angular.json</code>.
+          </p>
+          <p>
+            The sheet also follows <code>prefers-color-scheme</code> until you set an explicit
+            <code>data-theme</code> on <code>&lt;html&gt;</code>, so apps get dark mode for free.
+          </p>
+        </div>
+      </section>
+
+      <section class="doc-section" id="usage" docsReveal>
+        <h2 class="doc-section__title">Use a component</h2>
+        <div class="prose">
+          <p>
+            Every component is standalone. Import only what a template renders — the bundler drops
+            the rest.
+          </p>
+        </div>
+        <docs-code-block [code]="usageSnippet" language="ts" label="example.component.ts" />
+        <docs-code-block [code]="usageHtmlSnippet" language="html" label="example.component.html" />
+      </section>
+
+      <section class="doc-section" id="tokens" docsReveal>
+        <h2 class="doc-section__title">Design tokens</h2>
+        <div class="prose">
+          <p>
+            Color is expressed with CSS custom properties. Override a token globally to rebrand the
+            whole library, or scope it to a section to theme just that area.
+          </p>
+        </div>
+
+        <docs-code-block [code]="overrideSnippet" language="css" label="overrides.css" />
+        <docs-prop-table
+          [columns]="['Token', 'Type', 'Light value', 'Role']"
+          [rows]="tokenRows"
+        />
+        <div class="callout">
+          <span aria-hidden="true">💡</span>
+          <span>
+            Pair every background override with its <code>--pl-color-on-*</code> foreground token
+            so contrast stays accessible in both themes.
+          </span>
+        </div>
+      </section>
+
+      <section class="doc-section" id="dark-mode" docsReveal>
+        <h2 class="doc-section__title">Dark mode</h2>
+        <div class="prose">
+          <p>
+            Toggle the <code>data-theme</code> attribute — no component API changes. The demo
+            persists the choice in <code>localStorage</code> through a small
+            <code>ThemeService</code>; copy that pattern or wire it to your own store.
+          </p>
+        </div>
+        <docs-code-block [code]="darkModeSnippet" language="ts" label="theme-toggle.ts" />
+      </section>
+
+      <section class="doc-section" id="adding-components" docsReveal>
+        <h2 class="doc-section__title">Adding components</h2>
+        <div class="prose">
+          <p>
+            Documentation is registry-driven. Navigation, the landing-page index, page titles and
+            previous/next links all read from <code>component-registry.ts</code>, and each docs page
+            is lazy-loaded from the route map.
+          </p>
+          <p>
+            To document a new component: add a registry entry, create a page that reuses
+            <code>&lt;docs-demo-card&gt;</code>, <code>&lt;docs-prop-table&gt;</code> and
+            <code>&lt;docs-toc&gt;</code>, then register its lazy import.
+          </p>
+        </div>
+        <docs-code-block [code]="registrySnippet" language="ts" label="component-registry.ts" />
+        <div class="docs-actions">
+          <a class="btn btn--primary" routerLink="/components/button">See a documented component</a>
+        </div>
+      </section>
+    </article>
+
+    <aside class="docs-aside">
+      <docs-toc [sections]="sections" />
+    </aside>
+  </div>
+</div>

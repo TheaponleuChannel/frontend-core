@@ -7,7 +7,7 @@
       "projectType": "library",
       "root": "projects/core-ui",
       "sourceRoot": "projects/core-ui/src",
-      "prefix": "ml",
+      "prefix": "pl",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
@@ -57,13 +57,17 @@
               "zone.js"
             ],
             "tsConfig": "projects/demo/tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
-            "assets": [
-              {
-                "glob": "**/*",
-                "input": "projects/demo/public"
-              }
-            ],
+            "inlineStyleLanguage": "scss",              "assets": [
+                {
+                  "glob": "**/*",
+                  "input": "projects/demo/public"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "projects/demo/src/assets",
+                  "output": "/assets/"
+                }
+              ],
             "styles": [
               "projects/demo/src/styles.scss"
             ],
@@ -84,8 +88,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kB",
-                  "maximumError": "4kB"
+                  "maximumWarning": "8kB",
+                  "maximumError": "16kB"
                 }
               ],
               "outputHashing": "all"
@@ -121,13 +125,18 @@
               "zone.js/testing"
             ],
             "tsConfig": "projects/demo/tsconfig.spec.json",
-            "inlineStyleLanguage": "scss",
+            "inlineStyleLanguage": "scss",              
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "projects/demo/public"
-              }
-            ],
+                {
+                  "glob": "**/*",
+                  "input": "projects/demo/public"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "projects/demo/src/assets",
+                  "output": "/assets/"
+                }
+              ],
             "styles": [
               "projects/demo/src/styles.scss"
             ],

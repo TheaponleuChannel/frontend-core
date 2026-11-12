@@ -1,0 +1,73 @@
+<section class="demo">
+  @if (title() || description()) {
+    <header class="demo__header">
+      @if (title()) {
+        <h3>{{ title() }}</h3>
+      }
+      @if (description()) {
+        <p>{{ description() }}</p>
+      }
+    </header>
+  }
+
+  <div class="demo__stage" [class.demo__stage--flush]="!padded()">
+    <span class="demo__stage-label">{{ stageLabel() }}</span>
+    <div class="demo__stage-body">
+      <ng-content select="[demoPreview]"></ng-content>
+    </div>
+  </div>
+
+  <ng-content select="[demoControls]"></ng-content>
+
+  @if (hasCode()) {
+    <div class="demo__toolbar">
+      <div class="demo__tabs" role="tablist" aria-label="Code examples">
+        @for (tab of tabs(); track tab.id) {
+          <button
+            type="button"
+            role="tab"
+            class="demo__tab"
+            [class.is-active]="activeTab().id === tab.id"
+            [attr.aria-selected]="activeTab().id === tab.id"
+            (click)="selectTab(tab.id)"
+          >
+            {{ tab.label }}
+          </button>
+        }
+      </div>
+
+      <button
+        type="button"
+        class="demo__toggle"
+        [attr.aria-expanded]="codeOpen()"
+        (click)="toggleCode()"
+      >
+        {{ codeOpen() ? 'Hide code' : 'Show code' }}
+        <svg
+          viewBox="0 0 24 24"
+          width="14"
+          height="14"
+          aria-hidden="true"
+          [class.is-flipped]="codeOpen()"
+        >
+          <path
+            d="m6 9 6 6 6-6"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+    </div>
+
+    <div class="demo__code" [class.is-open]="codeOpen()">
+      <div class="demo__code-inner">
+        @if (activeTab(); as tab) {
+          <docs-code-block [code]="tab.code" [language]="tab.language" />
+        }
+      </div>
+    </div>
+  }
+</section>

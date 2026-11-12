@@ -1,2 +1,73 @@
-<main>Hello, World!</main>
-<ml-button (clicked)="onButtonClick($event)">Click Me</ml-button>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="topbar" [class.is-scrolled]="scrolled()">
+  <div class="topbar__progress" aria-hidden="true">
+    <span [style.transform]="'scaleX(' + progress() + ')'"></span>
+  </div>
+
+  <button
+    type="button"
+    class="topbar__menu"
+    [attr.aria-expanded]="sidebarOpen()"
+    aria-label="Toggle documentation navigation"
+    (click)="toggleSidebar()"
+  >
+    <span></span><span></span><span></span>
+  </button>
+
+  <a class="brand" routerLink="/" aria-label="Core UI home" (click)="closeSidebar()">
+    <span class="brand__mark" aria-hidden="true">
+      <img src="assets/photos/logo-icon.png" alt="" width="256" height="256" />
+    </span>
+    <span class="brand__text">
+      <strong>Core UI</strong>
+      <small>Angular 18</small>
+    </span>
+  </a>
+
+  <nav class="topbar__nav" aria-label="Primary">
+    <a routerLink="/getting-started" routerLinkActive="is-active">Guide</a>
+    <a routerLink="/components/button" routerLinkActive="is-active">Components</a>
+  </nav>
+
+  <div class="topbar__actions">
+    <span class="topbar__version chip">v0.0.1</span>
+    <app-theme-toggle />
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="shell__sidebar" [class.is-open]="sidebarOpen()">
+    <docs-sidebar (navigated)="closeSidebar()" />
+  </aside>
+
+  <button
+    type="button"
+    class="shell__backdrop"
+    [class.is-visible]="sidebarOpen()"
+    aria-label="Close navigation"
+    tabindex="-1"
+    (click)="closeSidebar()"
+  ></button>
+
+  <main id="main-content" class="shell__main">
+    <router-outlet />
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__brand">
+      <span class="brand__mark brand__mark--small" aria-hidden="true">
+        <img src="assets/photos/logo-icon.png" alt="" width="256" height="256" />
+      </span>
+      <span>Core UI — an Angular component library built for scale.</span>
+    </div>
+    <nav class="footer__links" aria-label="Footer">
+      <a routerLink="/getting-started">Getting started</a>
+      <a routerLink="/components/button">Button</a>
+      <a routerLink="/components/label">Label</a>
+    </nav>
+    <p class="footer__meta">© {{ year }} Core UI · Built with Angular 18</p>
+  </div>
+</footer>

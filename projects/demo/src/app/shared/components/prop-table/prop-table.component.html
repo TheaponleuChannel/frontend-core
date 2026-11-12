@@ -1,0 +1,22 @@
+<div class="table-wrap" tabindex="0" role="region" aria-label="API reference table" aria-describedby="prop-table-hint">
+  <table>
+    <thead>
+      <tr>
+        @for (column of columns(); track column) {
+          <th scope="col">{{ column }}</th>
+        }
+      </tr>
+    </thead>
+    <tbody>
+      @for (row of rows(); track row.name) {
+        <tr>
+          <td><code class="prop-name">{{ row.name }}</code></td>
+          <td><code class="prop-type">{{ row.type }}</code></td>
+          <td><code class="prop-default">{{ row.default }}</code></td>
+          <td>{{ row.description }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
+<p id="prop-table-hint" class="table-hint">Scroll horizontally to see every column on small screens.</p>

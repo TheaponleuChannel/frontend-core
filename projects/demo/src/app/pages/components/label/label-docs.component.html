@@ -1,0 +1,171 @@
+<div class="docs-page">
+  <div class="docs-grid">
+    <article class="docs-body">
+      <header class="page-header">
+        <div class="page-header__meta">
+          <span class="badge badge--stable">Stable</span>
+          <span class="chip">since v{{ entry?.since }}</span>
+          <span class="chip">{{ entry?.group }}</span>
+        </div>
+        <h1>{{ entry?.name }}</h1>
+        <p class="page-header__summary">{{ entry?.summary }}</p>
+        <code class="selector-pill">{{ entry?.selector }}</code>
+      </header>
+
+      <section class="doc-section" id="overview" docsReveal>
+        <h2 class="doc-section__title">Overview</h2>
+        <div class="prose">
+          <p>
+            <strong>pl-label</strong> wraps a native <code>&lt;label&gt;</code> and forwards the
+            <code>for</code> input. Project the visible text inside the tag — no extra configuration
+            required.
+          </p>
+        </div>
+        <docs-code-block [code]="importSnippet" language="ts" label="import" />
+        <docs-code-block [code]="basicHtml" language="html" label="basic-usage.html" />
+      </section>
+
+      <section class="doc-section" id="playground" docsReveal>
+        <h2 class="doc-section__title">Playground</h2>
+        <p class="doc-section__hint">
+          Rename the label, change the control id, and try focusing the input — the label is
+          clickable because <code>for</code> matches the input id.
+        </p>
+
+        <div class="playground">
+          <div class="playground__stage">
+            <div class="field">
+              <pl-label [for]="playgroundFor()">
+                {{ playgroundText() || 'Label' }}{{ playgroundRequired() ? ' *' : '' }}
+              </pl-label>
+              <input
+                class="text-input"
+                [id]="playgroundFor()"
+                type="text"
+                placeholder="Type something…"
+                [required]="playgroundRequired()"
+                [value]="playgroundValue()"
+                (input)="setPlaygroundValue($event)"
+              />
+            </div>
+            <p class="field__hint" aria-live="polite">
+              {{ playgroundValue() ? 'Value: ' + playgroundValue() : 'Focus the input from the label' }}
+            </p>
+          </div>
+
+          <div class="demo-controls">
+            <div class="demo-control-row">
+              <label class="demo-control-label" for="label-text">Text</label>
+              <input
+                id="label-text"
+                class="text-input"
+                type="text"
+                [value]="playgroundText()"
+                (input)="setPlaygroundText($event)"
+                placeholder="Label text"
+              />
+            </div>
+
+            <div class="demo-control-row">
+              <label class="demo-control-label" for="label-for">For</label>
+              <input
+                id="label-for"
+                class="text-input"
+                type="text"
+                [value]="playgroundFor()"
+                (input)="setPlaygroundFor($event)"
+                placeholder="Control id"
+              />
+            </div>
+
+            <div class="demo-control-row">
+              <span class="demo-control-label">State</span>
+              <label class="switch">
+                <input
+                  type="checkbox"
+                  [checked]="playgroundRequired()"
+                  (change)="setPlaygroundRequired($event)"
+                />
+                <span class="switch__track"></span>
+                <span>Required</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <docs-code-block [code]="playgroundSnippet()" language="html" label="generated markup" />
+      </section>
+
+      <section class="doc-section" id="examples" docsReveal>
+        <h2 class="doc-section__title">Examples</h2>
+
+        <docs-demo-card
+          title="With a text input"
+          description="Point for at the input id so clicking the label focuses the field."
+          [html]="basicHtml"
+        >
+          <div demoPreview class="demo-row">
+            <div class="field">
+              <pl-label for="demo-email">Email address</pl-label>
+              <input id="demo-email" class="text-input" type="email" placeholder="you@example.com" />
+            </div>
+          </div>
+        </docs-demo-card>
+
+        <docs-demo-card
+          title="Required field"
+          description="Signal required state in the label text; keep the real requirement on the control."
+          [html]="requiredHtml"
+        >
+          <div demoPreview class="demo-row">
+            <div class="field">
+              <pl-label for="demo-password">Password *</pl-label>
+              <input id="demo-password" class="text-input" type="password" required />
+            </div>
+          </div>
+        </docs-demo-card>
+
+        <docs-demo-card
+          title="Composed form group"
+          description="Stack the label and control with a small gap; the label inherits your typography."
+          [html]="basicHtml"
+          [ts]="composedTs"
+        >
+          <div demoPreview class="demo-row">
+            <div class="field">
+              <pl-label for="demo-fullname">Full name</pl-label>
+              <input id="demo-fullname" class="text-input" type="text" placeholder="Ada Lovelace" />
+              <span class="field__hint">As it should appear on your invoice.</span>
+            </div>
+          </div>
+        </docs-demo-card>
+      </section>
+
+      <section class="doc-section" id="api" docsReveal>
+        <h2 class="doc-section__title">API reference</h2>
+        <docs-prop-table [rows]="propRows" />
+        <p class="doc-section__hint">The projected content becomes the visible label text.</p>
+      </section>
+
+      <section class="doc-section" id="accessibility" docsReveal>
+        <h2 class="doc-section__title">Accessibility</h2>
+        <ul class="check-list">
+          <li>
+            Always provide <code>for</code>. A label without it does not name the control for
+            assistive technology.
+          </li>
+          <li>Avoid relying on placeholder text — it disappears as soon as the user types.</li>
+          <li>
+            Mark required fields with text (or <code>aria-required</code>), not only with color.
+          </li>
+        </ul>
+      </section>
+
+      <docs-pager [slug]="slug" />
+    </article>
+
+    <aside class="docs-aside">
+      <docs-toc [sections]="sections" />
+    </aside>
+  </div>
+</div>

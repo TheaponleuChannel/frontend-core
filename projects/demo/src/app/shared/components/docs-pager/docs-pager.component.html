@@ -1,0 +1,29 @@
+@if (neighbours().previous || neighbours().next) {
+  <nav class="pager" aria-label="Component pagination">
+    @if (neighbours().previous; as previous) {
+      <a class="pager__link pager__link--prev" [routerLink]="['/components', previous.slug]">
+        <span class="pager__label">
+          <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+            <path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          Previous
+        </span>
+        <span class="pager__title">{{ previous.name }}</span>
+      </a>
+    } @else {
+      <span></span>
+    }
+
+    @if (neighbours().next; as next) {
+      <a class="pager__link pager__link--next" [routerLink]="['/components', next.slug]">
+        <span class="pager__label">
+          Next
+          <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+            <path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </span>
+        <span class="pager__title">{{ next.name }}</span>
+      </a>
+    }
+  </nav>
+}
