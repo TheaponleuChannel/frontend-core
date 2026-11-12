@@ -30,13 +30,6 @@
   --pl-color-on-danger: #690005;
 }
 
-body {
-  min-height: 100vh;
-  margin: 0;
-  background-color: var(--pl-color-background);
-  color: var(--pl-color-on-background);
-}
-
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
     color-scheme: dark;
