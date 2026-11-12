@@ -1,5 +1,5 @@
 {
-  "name": "core-ui",
+  "name": "angular-pl-ui",
   "version": "0.0.1",
   "description": "The UI library for the frontend-core project which provides reusable components and utilities for building Angular applications.",
   "repository": { "type": "git", "url": "https://github.com/TheaponleuChannel/frontend-core" },
