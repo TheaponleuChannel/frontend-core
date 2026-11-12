@@ -1,0 +1,13 @@
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+
+@Component({
+  selector: 'ml-button',
+  standalone: true,
+  imports: [],
+  templateUrl: './button.component.html',
+  styleUrl: './button.component.css'
+})
+export class ButtonComponent {
+  @Input() disabled = false;
+  @Output() clicked = new EventEmitter<MouseEvent>();
+}
